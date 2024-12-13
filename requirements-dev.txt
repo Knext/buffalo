@@ -5,3 +5,4 @@ flake8~=6.0.0
 flake8-quotes
 cpplint~=1.6.1
 codespell~=2.2.2
+py-cpuinfo
