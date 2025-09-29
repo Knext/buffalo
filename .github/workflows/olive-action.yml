@@ -1,31 +1,32 @@
 name: OLIVE Action Test
 
 on:
+  push:
+    branches: [ ]
   pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
-      - feature/olive-action
-      - develop
-      - master
+    branches: [ feature/olive-action ]
   workflow_dispatch:
     inputs:
       analyze-only:
         description: "분석만 수행 (아티팩트/코멘트 생략)"
         required: false
-        default: "false"
+        default: "true"
         type: choice
         options:
           - "true"
           - "false"
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
-  olive-action:
-    name: OLIVE Action
-    runs-on: kakao-runner
+  olive-scan:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Run OLIVE Action
